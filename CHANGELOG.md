@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.0] - 2025-11-22
+### Added
+- ✨ **Auto-Uncheck**: New option to automatically reset completed items at midnight. (Configure via Settings > Devices & Services > Weeklies > Configure).
+- ☕ Added "Buy Me a Coffee" link to README.
+
 ## [0.1.3] - 2025-11-21
 ### Added
 - 📚 Added Dashboard Card examples to README (Markdown & Time-based).
