@@ -4,6 +4,7 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 [![GitHub Release](https://img.shields.io/github/release/emacholdt/weeklies.svg)](https://github.com/emacholdt/weeklies/releases)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow.svg)](https://www.buymeacoffee.com/brusselssprites)
 
 **Weeklies** is a custom Home Assistant integration designed to help families manage weekly recurring tasks and reminders. 
 
@@ -75,13 +76,11 @@ content: >
   {% set items = state_attr('sensor.weeklies_today', 'items') %}
   {% if items %}
     {% for item in items %}
-    - <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
+    <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
     {% endfor %}
   {% else %}
     *No tasks for today!* 🎉
   {% endif %}
-```
-
 ```
 
 ### Morning Routine (Time-Based)
@@ -99,7 +98,7 @@ content: >
     {% set items = state_attr('sensor.weeklies_today', 'items') %}
     {% if items %}
       {% for item in items %}
-      - <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
+    <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
       {% endfor %}
     {% else %}
       *No tasks for this morning.*
