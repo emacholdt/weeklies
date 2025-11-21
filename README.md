@@ -1,5 +1,7 @@
 # Weeklies for Home Assistant 🗓️
 
+<img src="logo.svg" align="right" width="128" height="128" alt="Weeklies Logo">
+
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 [![GitHub Release](https://img.shields.io/github/release/emacholdt/weeklies.svg)](https://github.com/emacholdt/weeklies/releases)
 
