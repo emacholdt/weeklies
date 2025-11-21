@@ -4,12 +4,18 @@
   "codeowners": [
     "@emacholdt"
   ],
-  "config_flow": true,
-  "dependencies": [],
-  "documentation": "https://github.com/emacholdt/weeklies",
-  "issue_tracker": "https://github.com/emacholdt/weeklies/issues",
-  "iot_class": "local_push",
-  "quality_scale": "silver",
-  "requirements": [],
-  "version": "0.1.2"
-}
+  {
+    "domain": "weeklies",
+    "name": "Weeklies",
+    "codeowners": [
+      "@emacholdt"
+    ],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/emacholdt/weeklies",
+    "issue_tracker": "https://github.com/emacholdt/weeklies/issues",
+    "iot_class": "local_push",
+    "quality_scale": "silver",
+    "requirements": [],
+    "version": "0.1.3"
+  }

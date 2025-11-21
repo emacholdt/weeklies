@@ -1,6 +1,6 @@
 # Weeklies for Home Assistant 🗓️
 
-<img src="logo.svg" align="right" width="128" height="128" alt="Weeklies Logo">
+<img src="https://raw.githubusercontent.com/emacholdt/weeklies/main/logo.svg" align="right" width="128" height="128" alt="Weeklies Logo">
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 [![GitHub Release](https://img.shields.io/github/release/emacholdt/weeklies.svg)](https://github.com/emacholdt/weeklies/releases)
@@ -60,6 +60,51 @@ automation:
       - service: notify.mobile_app_family
         data:
           message: "Don't forget today: {{ state_attr('sensor.weeklies_today', 'items') | map(attribute='text') | join(', ') }}"
+```
+
+## 📊 Dashboard Examples
+
+### Dynamic Daily Card (Markdown)
+This card automatically shows the tasks for the current day, including your custom icons. It's cleaner than the Todo card for a "read-only" view.
+
+```yaml
+type: markdown
+content: >
+  ## 📅 {{ now().strftime('%A') }}'s Tasks
+  
+  {% set items = state_attr('sensor.weeklies_today', 'items') %}
+  {% if items %}
+    {% for item in items %}
+    - <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
+    {% endfor %}
+  {% else %}
+    *No tasks for today!* 🎉
+  {% endif %}
+```
+
+```
+
+### Morning Routine (Time-Based)
+This card uses Jinja2 templates to only show content between **Midnight and 8:00 AM**.
+*Note: To completely hide the card border when empty, wrap this in a [Conditional Card](https://www.home-assistant.io/dashboards/conditional/) linked to a [Time of Day](https://www.home-assistant.io/integrations/tod/) binary sensor.*
+
+```yaml
+type: markdown
+content: >
+  {% set current_hour = now().hour %}
+  
+  {% if current_hour < 8 %}
+    ## 🌅 Morning Tasks
+    
+    {% set items = state_attr('sensor.weeklies_today', 'items') %}
+    {% if items %}
+      {% for item in items %}
+      - <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
+      {% endfor %}
+    {% else %}
+      *No tasks for this morning.*
+    {% endif %}
+  {% endif %}
 ```
 
 ## 🛠️ Services

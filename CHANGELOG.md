@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.3] - 2025-11-21
+### Added
+- 📚 Added Dashboard Card examples to README (Markdown & Time-based).
+- 🖼️ Fixed logo display in HACS by using absolute URL.
+
 ## [0.1.2] - 2025-11-21
 ### Fixed
 - 🐛 Fixed `TypeError` during setup (removed extra argument in `async_forward_entry_setups`).
