@@ -43,7 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "data": data_store,
     }
 
-    await hass.config_entries.async_forward_entry_setups(hass, entry, PLATFORMS)
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
     # Register Services
     async def add_item(call: ServiceCall) -> None:

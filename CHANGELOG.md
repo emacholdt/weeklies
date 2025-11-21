@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.2] - 2025-11-21
+### Fixed
+- 🐛 Fixed `TypeError` during setup (removed extra argument in `async_forward_entry_setups`).
+
 ## [0.1.1] - 2025-11-21
 ### Added
 - 🎨 Added a new logo!
