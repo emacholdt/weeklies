@@ -8,13 +8,18 @@
 
 **Weeklies** is a custom Home Assistant integration designed to help families manage weekly recurring tasks and reminders. 
 
+### Option 1: Automatic installation 
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=emacholdt&repository=weeklies)
+
+### Option 2: HACS installation
 1.  Open HACS in Home Assistant.
 2.  Go to **Integrations** > **Top right menu** > **Custom repositories**.
 3.  Add `https://github.com/emacholdt/weeklies` with category **Integration**.
 4.  Click **Install**.
 5.  Restart Home Assistant.
 
-### Option 2: Manual
+### Option 3: Manual installation
 1.  Download the latest release.
 2.  Copy the `custom_components/weeklies` folder to your `config/custom_components/` directory.
 3.  Restart Home Assistant.
@@ -88,50 +93,6 @@ card:
     {% endif %}
 ```
 
-### Advanced Dashboard Examples
-
-#### Hide Completed Items
-This card filters out items that have been marked as "completed" in the Todo list, showing only what's left to do.
-
-```yaml
-type: markdown
-content: >
-  ## 📝 To Do
-  
-  {% set items = state_attr('sensor.weeklies_today', 'items') %}
-  {% if items %}
-    {% for item in items %}
-      {% if item.status != 'completed' %}
-    <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
-      {% endif %}
-    {% endfor %}
-  {% else %}
-    *No tasks found.*
-  {% endif %}
-```
-
-#### Strikethrough Completed Items
-This card shows all items but crosses out the ones that are completed.
-
-```yaml
-type: markdown
-content: >
-  ## 📝 Daily List
-  
-  {% set items = state_attr('sensor.weeklies_today', 'items') %}
-  {% if items %}
-    {% for item in items %}
-      {% if item.status == 'completed' %}
-    <ha-icon icon="mdi:checkbox-marked-circle-outline"></ha-icon> <s>{{ item.text }}</s>
-      {% else %}
-    <ha-icon icon="{{ item.icon | default('mdi:checkbox-blank-circle-outline') }}"></ha-icon> {{ item.text }}
-      {% endif %}
-    {% endfor %}
-  {% else %}
-    *No tasks found.*
-  {% endif %}
-```
-
 ## 🛠️ Services
 
 **`weeklies.add_item`**
@@ -155,10 +116,10 @@ data:
 
 ## 📸 Screenshots
 
-| Daily View | Morning Routine | Advanced Strikethrough |
-|:---:|:---:|:---:|
-| ![Daily View](images/daily_view.png) | ![Morning Routine](images/morning_routine.png) | ![Advanced Strikethrough](images/advanced_strikesthrough.png) |
-| *Standard Markdown Card* | *Conditional Morning Card* | *Strikethrough Completed* |
+| Daily View | Morning Routine |
+|:---:|:---:|
+| ![Daily View](images/daily_view.png) | ![Morning Routine](images/morning_routine.png) |
+| *Standard Markdown Card* | *Conditional Morning Card* |
 
 ## ❤️ Contributing
 Issues and Pull Requests are welcome!
