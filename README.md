@@ -8,19 +8,6 @@
 
 **Weeklies** is a custom Home Assistant integration designed to help families manage weekly recurring tasks and reminders. 
 
-Unlike a standard To-Do list where items disappear once checked, **Weeklies** is designed for things that happen *every week* (e.g., "Pack Gym Bag" on Mondays, "Take out Trash" on Tuesdays).
-
-## ✨ Features
-
-*   **📅 Weekly Lists**: Dedicated lists for every day of the week (Monday - Sunday).
-*   **✅ Native Todo Support**: Integrates with Home Assistant's native Todo List UI for easy management.
-*   **🤖 Automation Ready**: Exposes `sensor.weeklies_today` and `sensor.weeklies_tomorrow` for powerful automations.
-*   **💾 Persistent**: Data is stored safely in Home Assistant and survives restarts.
-*   **🎨 Icon Support**: Add icons to items (visible in sensor attributes) for custom dashboards.
-
-## 📥 Installation
-
-### Option 1: HACS (Recommended)
 1.  Open HACS in Home Assistant.
 2.  Go to **Integrations** > **Top right menu** > **Custom repositories**.
 3.  Add `https://github.com/emacholdt/weeklies` with category **Integration**.
@@ -43,23 +30,6 @@ Unlike a standard To-Do list where items disappear once checked, **Weeklies** is
 
 ### In the Dashboard
 Add a **Todo List** card to your dashboard and select one of the `Weeklies` lists (e.g., `Weeklies Monday`). You can add and remove items directly from the UI.
-
-### In Automations
-Use the `sensor.weeklies_today` sensor to trigger notifications.
-
-```yaml
-automation:
-  - alias: "Morning Reminders"
-    trigger:
-      - platform: time
-        at: "07:00:00"
-    condition:
-      - condition: numeric_state
-        entity_id: sensor.weeklies_today
-        above: 0
-    action:
-      - service: notify.mobile_app_family
-        data:
           message: "Don't forget today: {{ state_attr('sensor.weeklies_today', 'items') | map(attribute='text') | join(', ') }}"
 ```
 
@@ -67,6 +37,7 @@ automation:
 
 ### Dynamic Daily Card (Markdown)
 This card automatically shows the tasks for the current day, including your custom icons. It's cleaner than the Todo card for a "read-only" view.
+
 
 ```yaml
 type: markdown
@@ -83,16 +54,30 @@ content: >
   {% endif %}
 ```
 
-### Morning Routine (Time-Based)
-This card uses Jinja2 templates to only show content between **Midnight and 8:00 AM**.
-*Note: To completely hide the card border when empty, wrap this in a [Conditional Card](https://www.home-assistant.io/dashboards/conditional/) linked to a [Time of Day](https://www.home-assistant.io/integrations/tod/) binary sensor.*
+### Morning Routine (Conditional Card)
+This example uses a [Conditional Card](https://www.home-assistant.io/dashboards/conditional/) to only show your morning tasks when a specific condition is met. This is cleaner because it completely hides the card (including borders) when not needed.
+
+**Prerequisite:** You need a binary sensor that is "on" during the morning. You can easily create this in your `configuration.yaml`:
 
 ```yaml
-type: markdown
-content: >
-  {% set current_hour = now().hour %}
-  
-  {% if current_hour < 8 %}
+# configuration.yaml
+binary_sensor:
+  - platform: tod
+    name: Morning
+    after: "05:00:00"
+    before: "12:00:00"
+```
+
+**Card Configuration:**
+
+```yaml
+type: conditional
+conditions:
+  - entity: binary_sensor.morning # Replace with your Time of Day sensor
+    state: "on"
+card:
+  type: markdown
+  content: >
     ## 🌅 Morning Tasks
     
     {% set items = state_attr('sensor.weeklies_today', 'items') %}
@@ -103,7 +88,6 @@ content: >
     {% else %}
       *No tasks for this morning.*
     {% endif %}
-  {% endif %}
 ```
 
 ## 🛠️ Services
@@ -126,6 +110,13 @@ data:
   day: monday
   text: "Gym"
 ```
+
+## 📸 Screenshots
+
+| Daily View | Morning Routine |
+|:---:|:---:|
+| ![Daily View](images/daily_view.png) | ![Morning Routine](images/morning_routine.png) |
+| *Standard Markdown Card* | *Conditional Morning Card* |
 
 ## ❤️ Contributing
 Issues and Pull Requests are welcome!
