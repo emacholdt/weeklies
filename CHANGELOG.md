@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.4] - 2025-11-23
+### Added
+- ✨ **Services UI**: Added `services.yaml` to enable UI mode for `add_item` and `remove_item` services in Developer Tools.
+- 🚀 **Workflows**: Added beta release workflow.
+
 ## [0.2.0] - 2025-11-22
 ### Added
 - ✨ **Auto-Uncheck**: New option to automatically reset completed items at midnight. (Configure via Settings > Devices & Services > Weeklies > Configure).
