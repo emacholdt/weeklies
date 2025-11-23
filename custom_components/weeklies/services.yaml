@@ -1,0 +1,57 @@
+add_item:
+  name: Add Item
+  description: Add a new item to a weekly list.
+  fields:
+    day:
+      name: Day
+      description: The day of the week to add the item to.
+      required: true
+      selector:
+        select:
+          options:
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+            - sunday
+          translation_key: days
+    text:
+      name: Text
+      description: The content of the todo item.
+      required: true
+      selector:
+        text:
+    icon:
+      name: Icon
+      description: An optional icon for the item.
+      required: false
+      selector:
+        icon:
+
+remove_item:
+  name: Remove Item
+  description: Remove an item from a weekly list.
+  fields:
+    day:
+      name: Day
+      description: The day of the week to remove the item from.
+      required: true
+      selector:
+        select:
+          options:
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+            - sunday
+          translation_key: days
+    text:
+      name: Text
+      description: The content of the todo item to remove.
+      required: true
+      selector:
+        text:
